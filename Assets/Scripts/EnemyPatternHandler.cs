@@ -44,37 +44,29 @@ public class EnemyPatternHandler : MonoBehaviour
         canvas.enabled = dist <= revealDistance;
     }
 
-    void GenerateRandomPattern()
+   void GenerateRandomPattern()
     {
-        int basePattern = 1;
+        int patternCount = 1;
 
         switch (rank)
         {
-            case EnemyRank.Low: basePattern = 1; break;
-            case EnemyRank.Medium: basePattern = 2; break;
-            case EnemyRank.High: basePattern = 3; break;
+            case EnemyRank.Low: patternCount = 1; break;
+            case EnemyRank.Medium: patternCount = Random.Range(2, 3 + 1); break;
+            case EnemyRank.High: patternCount = 3; break;
         }
 
-        // 加上微调的随机性（-1, 0, +1）
-        int finalPatternCount = Mathf.Clamp(basePattern + Random.Range(-1, 2), 1, 3);
-
         patternSequence.Clear();
+        List<PatternType> used = new List<PatternType>();
 
-        int lastType = -1; // 确保不是三个都一样
-
-        for (int i = 0; i < finalPatternCount; i++)
+        while (patternSequence.Count < patternCount)
         {
-            PatternType randomType;
-            int retry = 0;
+            PatternType rand = (PatternType)Random.Range(0, iconSprites.Length);
 
-            do
-            {
-                randomType = (PatternType)Random.Range(0, iconSprites.Length);
-                retry++;
-            } while (i > 0 && (int)randomType == lastType && retry < 10); // 避免全部重复
+            // 确保最多重复一次
+            int sameCount = patternSequence.FindAll(p => p == rand).Count;
+            if (sameCount >= 2) continue;
 
-            lastType = (int)randomType;
-            patternSequence.Add(randomType);
+            patternSequence.Add(rand);
         }
     }
 
