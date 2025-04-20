@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "curse of the sand.sln"
+    "dotnet.defaultSolution": "curse-of-the-sand.sln"
 }
