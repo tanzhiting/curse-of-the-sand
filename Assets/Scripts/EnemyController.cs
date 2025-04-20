@@ -45,16 +45,24 @@ public class EnemyController : MonoBehaviour
 
     private void Patroling()
     {
-        if(!walkPointSet) SearchWalkPoint();
+        if (!walkPointSet)
+        {
+            SearchWalkPoint();
+        }
 
-        if(walkPointSet)
+        if (walkPointSet)
+        {
             agent.SetDestination(walkPoint);
-        
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    Debug.Log("✅ 到达 walkPoint，准备找新的点");
+                    walkPointSet = false;
+                }
+            }
+        }
     }
 
     private void SearchWalkPoint()
@@ -63,10 +71,21 @@ public class EnemyController : MonoBehaviour
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        Vector3 randomPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        NavMeshHit hit;
+
+        if (NavMesh.SamplePosition(randomPoint, out hit, 20f, NavMesh.AllAreas))
+        {
+            walkPoint = hit.position;
             walkPointSet = true;
+
+            Debug.Log("✅ 成功用 NavMesh 找到 walkPoint: " + walkPoint);
+        }
+        else
+        {
+            Debug.Log("❌ NavMesh 没找到合法 walkPoint");
+        }
     }
 
     private void ChasePlayer()
@@ -108,5 +127,17 @@ public class EnemyController : MonoBehaviour
     private void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(walkPoint, 1f);
     }
 }
