@@ -58,7 +58,6 @@ public class EnemyController : MonoBehaviour
             {
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {
-                    Debug.Log("✅ 到达 walkPoint，准备找新的点");
                     walkPointSet = false;
                 }
             }
@@ -79,12 +78,6 @@ public class EnemyController : MonoBehaviour
         {
             walkPoint = hit.position;
             walkPointSet = true;
-
-            Debug.Log("✅ 成功用 NavMesh 找到 walkPoint: " + walkPoint);
-        }
-        else
-        {
-            Debug.Log("❌ NavMesh 没找到合法 walkPoint");
         }
     }
 
