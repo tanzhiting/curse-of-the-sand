@@ -27,6 +27,9 @@ public class EnemyPatternHandler : MonoBehaviour
 
     public EnemyRank rank = EnemyRank.Low;
 
+    public GameObject potionPrefab;
+    public GameObject totemPrefab;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -95,7 +98,8 @@ public class EnemyPatternHandler : MonoBehaviour
             currentIndex++;
 
             if (currentIndex >= patternSequence.Count)
-            {
+            {   
+                DropLoot();
                 Destroy(gameObject);
             }
         }
@@ -103,6 +107,29 @@ public class EnemyPatternHandler : MonoBehaviour
         {
             currentIndex = 0;
             UpdateIcons(); 
+        }
+    }
+
+    void DropLoot()
+    {
+        float dropChance = 0f;
+        switch (rank)
+        {
+            case EnemyRank.Low:
+                dropChance = Random.value;
+                if (dropChance < 0.4f) Instantiate(potionPrefab, transform.position, Quaternion.identity);
+                break;
+
+            case EnemyRank.Medium:
+                dropChance = Random.value;
+                if (dropChance < 0.6f) Instantiate(potionPrefab, transform.position, Quaternion.identity);
+                if (Random.value < 0.2f) Instantiate(totemPrefab, transform.position + Vector3.right * 0.5f, Quaternion.identity);
+                break;
+
+            case EnemyRank.High:
+                Instantiate(potionPrefab, transform.position, Quaternion.identity);
+                Instantiate(totemPrefab, transform.position + Vector3.right * 0.5f, Quaternion.identity);
+                break;
         }
     }
 
@@ -114,4 +141,3 @@ public class EnemyPatternHandler : MonoBehaviour
         }
     }
 }
-
