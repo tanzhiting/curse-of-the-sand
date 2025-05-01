@@ -26,6 +26,7 @@ public class HealingItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("玩家进入拾取区域：" + itemType);            
             PlayerStats stats = other.GetComponent<PlayerStats>();
             
             if(stats != null)

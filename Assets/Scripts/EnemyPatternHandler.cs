@@ -120,7 +120,7 @@ public class EnemyPatternHandler : MonoBehaviour
             case EnemyRank.Low:
                 dropChance = Random.value;
                 if (dropChance < 0.4f)
-                    Instantiate(potionPrefab, transform.position, Quaternion.identity);
+                    Instantiate(potionPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
                 break;
             case EnemyRank.Medium:
                 if (Random.value < 0.6f)
@@ -129,10 +129,21 @@ public class EnemyPatternHandler : MonoBehaviour
                     Instantiate(totemPrefab, transform.position + Vector3.right * 0.5f, Quaternion.identity);
                 break;
             case EnemyRank.High:
-                Instantiate(potionPrefab, transform.position, Quaternion.identity);
+            float roll = Random.value;
+
+            if (roll < 0.6f)
+            {
+                // 掉落 Potion（60% 概率）
+                Instantiate(potionPrefab, transform.position + Vector3.up * 0.3f, Quaternion.identity);
+            }
+            else if (roll < 0.9f)
+            {
+                // 掉落 Totem（30% 概率：从 0.6 ~ 0.9）
                 Instantiate(totemPrefab, transform.position + Vector3.right * 0.5f, Quaternion.identity);
-                break;
-        }
+            }
+            // 其余 10% 什么都不掉落
+            break;
+                }
     }
 
     void LateUpdate()
