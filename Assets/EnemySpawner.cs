@@ -6,22 +6,39 @@ public class EnemySpawner : MonoBehaviour
     public GameObject anubisPrefab;
     public GameObject pharaohPrefab;
 
-    public float spawnInterval = 5f;
     public Transform[] spawnPoints;
+    public float baseSpawnInterval = 5f;
+    public int maxEnemies = 20;
+    public int initialSpawnCount = 15;
+
+    private float timer = 0f;
 
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", 2f, spawnInterval);
+        for (int i = 0; i < initialSpawnCount; i++)
+        {
+            SpawnEnemy();
+        }
+    }
+
+    void Update()
+    {
+        int currentEnemies = CountActiveEnemies();
+
+        float spawnInterval = Mathf.Lerp(1f, baseSpawnInterval, currentEnemies / (float)maxEnemies);
+
+        timer += Time.deltaTime;
+        if (timer >= spawnInterval && currentEnemies < maxEnemies)
+        {
+            SpawnEnemy();
+            timer = 0f;
+        }
     }
 
     void SpawnEnemy()
     {
-        // 随机选择一个 SpawnPoint
-        Transform point = spawnPoints[Random.Range(0, spawnPoints.Length)];
-
-        // 随机选择生成的敌人
+        GameObject prefabToSpawn;
         float r = Random.value;
-        GameObject prefabToSpawn = null;
 
         if (r < 0.5f)
             prefabToSpawn = mummyPrefab;
@@ -30,7 +47,27 @@ public class EnemySpawner : MonoBehaviour
         else
             prefabToSpawn = pharaohPrefab;
 
-        // 同时在多个 spawnPoint 生成敌人
-        Instantiate(prefabToSpawn, point.position, Quaternion.identity, point);
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        GameObject enemy = EnemyPoolManager.Instance.GetEnemyFromPool(prefabToSpawn);
+        if (enemy != null)
+        {
+            enemy.transform.position = spawnPoint.position;
+            enemy.transform.rotation = Quaternion.identity;
+            enemy.SetActive(true);
+        }
+    }
+
+    int CountActiveEnemies()
+    {
+        int count = 0;
+        foreach (var pool in EnemyPoolManager.Instance.enemyPools)
+        {
+            foreach (var enemy in pool.pool)
+            {
+                if (enemy.activeInHierarchy)
+                    count++;
+            }
+        }
+        return count;
     }
 }

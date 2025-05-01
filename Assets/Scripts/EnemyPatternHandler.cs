@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public enum PatternType { A, B, C }
 public enum EnemyRank { Low, Medium, High }
@@ -24,8 +24,23 @@ public class EnemyPatternHandler : MonoBehaviour
     public GameObject potionPrefab;
     public GameObject totemPrefab;
 
+    public Transform lootParent;
+
     void Start()
     {
+        if (lootParent == null)
+        {
+            GameObject lootGO = GameObject.Find("LootItems");
+            if (lootGO != null)
+            {
+                lootParent = lootGO.transform;
+            }
+            else
+            {
+                Debug.LogWarning("LootItems GameObject not found in scene.");
+            }
+        }
+
         player = GameObject.FindWithTag("Player").transform;
         canvas = GetComponentInChildren<Canvas>();
         enemyController = GetComponent<EnemyController>();
@@ -34,7 +49,7 @@ public class EnemyPatternHandler : MonoBehaviour
         UpdateIcons();
         canvas.enabled = false;
 
-                // 提高初始高度，结合等级决定基础偏移高度
+        // Adjust height based on enemy rank
         float baseHeight = 2f;
         switch (rank)
         {
@@ -102,7 +117,7 @@ public class EnemyPatternHandler : MonoBehaviour
             if (currentIndex >= patternSequence.Count)
             {
                 DropLoot();
-                Destroy(gameObject);
+                gameObject.SetActive(false); // Object pooling reuse
             }
         }
         else
@@ -112,38 +127,66 @@ public class EnemyPatternHandler : MonoBehaviour
         }
     }
 
+    // Reset pattern and state
+    public void InitializePattern()
+    {
+        currentIndex = 0;
+        GenerateRandomPattern();
+        UpdateIcons();
+    }
+
     void DropLoot()
     {
+        // Add loot drop logic based on enemy rank
         float dropChance;
+        GameObject drop;
+
         switch (rank)
         {
             case EnemyRank.Low:
                 dropChance = Random.value;
                 if (dropChance < 0.4f)
-                    Instantiate(potionPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
-                break;
-            case EnemyRank.Medium:
-                if (Random.value < 0.6f)
-                    Instantiate(potionPrefab, transform.position, Quaternion.identity);
-                if (Random.value < 0.2f)
-                    Instantiate(totemPrefab, transform.position + Vector3.right * 0.5f, Quaternion.identity);
-                break;
-            case EnemyRank.High:
-            float roll = Random.value;
-
-            if (roll < 0.6f)
-            {
-                // 掉落 Potion（60% 概率）
-                Instantiate(potionPrefab, transform.position + Vector3.up * 0.3f, Quaternion.identity);
-            }
-            else if (roll < 0.9f)
-            {
-                // 掉落 Totem（30% 概率：从 0.6 ~ 0.9）
-                Instantiate(totemPrefab, transform.position + Vector3.right * 0.5f, Quaternion.identity);
-            }
-            // 其余 10% 什么都不掉落
-            break;
+                {
+                    drop = Instantiate(potionPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+                    if (lootParent != null)
+                        drop.transform.SetParent(lootParent);
                 }
+                break;
+
+            case EnemyRank.Medium:
+                float roll = Random.value;
+
+                if (roll < 0.6f)
+                {
+                    drop = Instantiate(potionPrefab, transform.position, Quaternion.identity);
+                    if (lootParent != null)
+                        drop.transform.SetParent(lootParent);
+                }
+                else if (roll < 0.8f)
+                {
+                    drop = Instantiate(totemPrefab, transform.position + Vector3.right * 0.5f, Quaternion.identity);
+                    if (lootParent != null)
+                        drop.transform.SetParent(lootParent);
+                }
+                break;
+
+            case EnemyRank.High:
+                roll = Random.value;
+
+                if (roll < 0.6f)
+                {
+                    drop = Instantiate(potionPrefab, transform.position + Vector3.up * 0.3f, Quaternion.identity);
+                    if (lootParent != null)
+                        drop.transform.SetParent(lootParent);
+                }
+                else if (roll < 0.9f)
+                {
+                    drop = Instantiate(totemPrefab, transform.position + Vector3.right * 0.5f, Quaternion.identity);
+                    if (lootParent != null)
+                        drop.transform.SetParent(lootParent);
+                }
+                break;
+        }
     }
 
     void LateUpdate()
@@ -151,14 +194,15 @@ public class EnemyPatternHandler : MonoBehaviour
         if (canvas != null)
         {
             canvas.transform.LookAt(Camera.main.transform);
-            AvoidOverlap(); 
+            AvoidOverlap();
         }
     }
 
     void AvoidOverlap()
     {
+        // Prevent UI overlap with nearby enemies
         float offsetY = 0f;
-        Collider[] others = Physics.OverlapSphere(transform.position, 2f); // 检查周围的敌人
+        Collider[] others = Physics.OverlapSphere(transform.position, 2f);
 
         foreach (var col in others)
         {
@@ -169,7 +213,7 @@ public class EnemyPatternHandler : MonoBehaviour
                 float dist = Vector3.Distance(transform.position, other.transform.position);
                 if (dist < 2f)
                 {
-                    offsetY += 0.6f; // 位移更大，避免重叠
+                    offsetY += 0.6f;
                 }
             }
         }
