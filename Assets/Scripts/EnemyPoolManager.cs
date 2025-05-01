@@ -40,9 +40,15 @@ public class EnemyPoolManager : MonoBehaviour
                 foreach (var enemy in pool.pool)
                 {
                     if (!enemy.activeInHierarchy)
+                    {
+                        // 复用敌人时，重置其状态
+                        enemy.SetActive(true);
+                        enemy.GetComponent<EnemyPatternHandler>().ResetEnemy();
                         return enemy;
+                    }
                 }
 
+                // 如果池中没有可复用的敌人，创建一个新的敌人
                 GameObject newEnemy = Instantiate(prefab, enemyParent);
                 newEnemy.SetActive(false);
                 pool.pool.Add(newEnemy);

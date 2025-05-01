@@ -53,7 +53,6 @@ public class EnemySpawner : MonoBehaviour
         {
             enemy.transform.position = spawnPoint.position;
             enemy.transform.rotation = Quaternion.identity;
-            enemy.SetActive(true);
         }
     }
 

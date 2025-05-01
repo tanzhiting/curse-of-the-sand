@@ -67,6 +67,30 @@ public class EnemyPatternHandler : MonoBehaviour
         canvas.enabled = dist <= revealDistance;
         AvoidOverlap();
     }
+    
+    public void ResetEnemy()
+    {
+        // 重置图案和 UI
+        InitializePattern(); // 重置 currentIndex 和 icon 图案、颜色
+
+        // 重置动画（如果你使用 Animator）
+        Animator animator = GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.Rebind(); // 重置所有动画参数和状态
+            animator.Play("Idle", 0, 0f); // 回到 Idle 状态，或你默认的动画状态
+        }
+
+        // 重置 Canvas 显示
+        if (canvas != null)
+        {
+            canvas.enabled = false; // 不强制显示 UI，等靠近时再显示
+            AvoidOverlap(); // 重算 UI 位置
+        }
+
+        // 重置位置和旋转（如果有的话，或由 spawn manager 控制）
+        transform.rotation = Quaternion.identity;
+    }
 
     void GenerateRandomPattern()
     {
