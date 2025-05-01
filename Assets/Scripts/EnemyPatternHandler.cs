@@ -213,13 +213,25 @@ public class EnemyPatternHandler : MonoBehaviour
                 float dist = Vector3.Distance(transform.position, other.transform.position);
                 if (dist < 2f)
                 {
-                    offsetY += 0.6f;
+                    offsetY += 0.6f;  // Apply offset if overlapping
                 }
             }
         }
 
+        // Ensure the UI position stays within the screen bounds
         Vector3 pos = canvas.transform.localPosition;
         pos.y += offsetY;
+
+        // Get the screen bounds in world space
+        float screenHeight = Screen.height;
+        float worldHeight = Camera.main.orthographicSize * 2f; // For orthographic camera
+        float screenToWorldRatio = worldHeight / screenHeight;
+        float maxOffsetY = worldHeight * 0.25f; // Max 25% of screen height
+
+        // Limit the offset to avoid going out of the screen
+        pos.y = Mathf.Clamp(pos.y, -maxOffsetY, maxOffsetY);
+
+        // Apply the position change
         canvas.transform.localPosition = pos;
     }
 }
