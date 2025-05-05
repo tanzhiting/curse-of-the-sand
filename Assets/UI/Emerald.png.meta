@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cce468e84c4f5e346ae13f1fb3d8530b
+guid: c8acf4409d330954cbf919c9afd51e13
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 80
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: image_355-removebg-preview (1) 1_0
+      name: Emerald
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 266
-        height: 253
+        width: 222
+        height: 247
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,8 +138,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2af06f83a814264eab8cbd97112e444
-      internalID: 545696208
+      spriteID: 702f0c9e4ebe7384fbee2424776e4b35
+      internalID: -945052949
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3fb10c6f88a4f0344981e15c96bf524f
+    spriteID: 5ce53f0120c532541a77109d73433b4f
     internalID: 0
     vertices: []
     indices: 
@@ -158,7 +158,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      image_355-removebg-preview (1) 1_0: 545696208
+      Emerald: -945052949
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

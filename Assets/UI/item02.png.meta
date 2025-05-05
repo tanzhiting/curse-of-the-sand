@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 34a600b5d1a01d84a931e47a0e24f5f4
+guid: a9f1b2140789f1e42acf4bd3aa0186c9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 60
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: the_curse_of_the_sand__8_-removebg-preview 2_0
+      name: item02_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 223
-        height: 194
+        width: 141
+        height: 262
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,8 +138,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd8a76390b242ad419b88394308c21a9
-      internalID: -1528836902
+      spriteID: f606bfb66da4a274aa3a8763e04df2e6
+      internalID: 1913944849
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 245d72806b68953419567f483c235191
+    spriteID: cfea90e0c3896f742ba38688ec61eb49
     internalID: 0
     vertices: []
     indices: 
@@ -158,7 +158,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      the_curse_of_the_sand__8_-removebg-preview 2_0: -1528836902
+      item02_0: 1913944849
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

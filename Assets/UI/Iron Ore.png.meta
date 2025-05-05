@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 21e8f12987e05904bbc34e14d1d9f524
+guid: a5e6f60fb8071b64583be9d4e0dad9ea
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,23 +123,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Removal-773 2_0
+      name: Iron Ore
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 222
-        height: 213
+        width: 266
+        height: 238
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f713ed7b18170ed4d8e6511740f5d7ba
-      internalID: 1439218463
+      spriteID: b6b1fbefaf532cd4cae5ccb608ca2c7a
+      internalID: -222205671
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3a85476df0ea85a40a48b2656e244808
+    spriteID: 51f29fdcef0c87c4c9a76b034739f849
     internalID: 0
     vertices: []
     indices: 
@@ -158,7 +158,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Removal-773 2_0: 1439218463
+      Iron Ore: -222205671
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

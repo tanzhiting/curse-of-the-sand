@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e724219f261af1148a9edf32763ba3c4, type: 3}
+  m_Name: The Winged Scarab Pectoral of Tutankhamu
+  m_EditorClassIdentifier: 
+  itemID: treasure_Winged
+  fullName: The Winged Scarab Pectoral of Tutankhamu
+  blurredName: ???
+  fullDescription: "A winged scarab amulet from Tutankhamun\u2019s tomb, symbolizing
+    rebirth, divinity, and royal protection."
+  blurredDescription: A beetle of deep blue takes flight on golden wings, cradling
+    the sun and guarding eternity.
+  image: {fileID: 1853753299, guid: 1bae2228b49cbad4da13759cbd0fd8af, type: 3}
+  requiredFragments:
+  - fragment: {fileID: 11400000, guid: f9762676aaab76e45afef0ad33b7fe5e, type: 2}
+    requiredAmount: 10
+  - fragment: {fileID: 11400000, guid: 4dc23bc87523db244b2e03dc1f500e93, type: 2}
+    requiredAmount: 25

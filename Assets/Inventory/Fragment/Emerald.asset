@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd888a3107c15943a081b46860d744a, type: 3}
+  m_Name: Emerald
+  m_EditorClassIdentifier: 
+  fragmentID: fragment_Emerald
+  fragmentName: Emerald
+  icon: {fileID: -945052949, guid: c8acf4409d330954cbf919c9afd51e13, type: 3}

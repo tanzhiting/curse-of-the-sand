@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 87fa82cf42e5bce4c8cb7da999b274e2
+guid: 21e8f12987e05904bbc34e14d1d9f524
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,23 +123,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: the_curse_of_the_sand__8_-removebg-preview 3_0
+      name: Sapphire Orb
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 194
-        height: 254
+        width: 222
+        height: 213
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03eab6b9dad53ed47b20ca56ba811139
-      internalID: -25704931
+      spriteID: f713ed7b18170ed4d8e6511740f5d7ba
+      internalID: 1439218463
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e926efab1ab6a644ba16079abaa2ed0
+    spriteID: 3a85476df0ea85a40a48b2656e244808
     internalID: 0
     vertices: []
     indices: 
@@ -158,7 +158,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      the_curse_of_the_sand__8_-removebg-preview 3_0: -25704931
+      Sapphire Orb: 1439218463
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
