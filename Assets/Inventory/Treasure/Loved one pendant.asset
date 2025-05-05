@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e724219f261af1148a9edf32763ba3c4, type: 3}
   m_Name: Loved one pendant
   m_EditorClassIdentifier: 
-  itemID: treasure_Falcon
-  fullName: "Falcon Pectoral of Tutankhamun\r"
+  itemID: treasure_Loved
+  fullName: "Loved one pendant\r"
   blurredName: ???
   fullDescription: It gleams like hope, yet hangs like sorrow; dropped once, it doomed
     a soul to wander where memory cannot follow.

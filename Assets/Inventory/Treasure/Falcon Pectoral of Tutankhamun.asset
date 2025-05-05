@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e724219f261af1148a9edf32763ba3c4, type: 3}
   m_Name: Falcon Pectoral of Tutankhamun
   m_EditorClassIdentifier: 
-  itemID: 
-  fullName: 
-  blurredName: 
-  fullDescription: 
-  blurredDescription: 
-  image: {fileID: 0}
-  requiredFragments: []
+  itemID: treasure_Falcon
+  fullName: "Falcon Pectoral of Tutankhamun\r"
+  blurredName: ???
+  fullDescription: "A falcon-shaped pectoral from Tutankhamun\u2019s tomb, embodying
+    divine kingship and celestial protection."
+  blurredDescription: A golden bird with eyes of stone soars across the chest, guarding
+    the breath of kings.
+  image: {fileID: 1131442138, guid: 5eeb8a4ad13f6034489ddd3bf78ef634, type: 3}
+  requiredFragments:
+  - fragment: {fileID: 11400000, guid: 14bc79c4d25f98a42a163e33aa581357, type: 2}
+    requiredAmount: 15
+  - fragment: {fileID: 11400000, guid: f9762676aaab76e45afef0ad33b7fe5e, type: 2}
+    requiredAmount: 30

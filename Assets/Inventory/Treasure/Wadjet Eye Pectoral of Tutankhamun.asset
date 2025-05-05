@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e724219f261af1148a9edf32763ba3c4, type: 3}
   m_Name: Wadjet Eye Pectoral of Tutankhamun
   m_EditorClassIdentifier: 
-  itemID: 
-  fullName: 
-  blurredName: 
-  fullDescription: 
-  blurredDescription: 
-  image: {fileID: 0}
-  requiredFragments: []
+  itemID: treasure_Wadjet
+  fullName: "Wadjet Eye Pectoral of Tutankhamun\r"
+  blurredName: ???
+  fullDescription: ' an ancient Egyptian protective amulet, often made of gold and
+    worn by royalty or the deceased.'
+  blurredDescription: A golden amulet inlaid with gems, carved with a sacred eye
+    to protect and guide.
+  image: {fileID: 1696588569, guid: 2cece0528c5b35a41a76ddecf72d5a64, type: 3}
+  requiredFragments:
+  - fragment: {fileID: 11400000, guid: 739baf515ae2726418c52e319d691a90, type: 2}
+    requiredAmount: 5
+  - fragment: {fileID: 11400000, guid: 4dc23bc87523db244b2e03dc1f500e93, type: 2}
+    requiredAmount: 10

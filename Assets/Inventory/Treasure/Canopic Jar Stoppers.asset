@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e724219f261af1148a9edf32763ba3c4, type: 3}
   m_Name: Canopic Jar Stoppers
   m_EditorClassIdentifier: 
-  itemID: 
-  fullName: 
-  blurredName: 
-  fullDescription: 
-  blurredDescription: 
-  image: {fileID: 0}
-  requiredFragments: []
+  itemID: treasure_Canopic
+  fullName: Canopic Jar Stoppers
+  blurredName: ???
+  fullDescription: "Stoppers for canopic jars, shaped as Horus\u2019s sons, each
+    guarding a sacred organ for the afterlife."
+  blurredDescription: Four faces guard the hollow vessels, each a silent vow to shield
+    what once gave life.
+  image: {fileID: -1316937556, guid: 0e770ff2bc098314ca94886ce5a5a283, type: 3}
+  requiredFragments:
+  - fragment: {fileID: 11400000, guid: 739baf515ae2726418c52e319d691a90, type: 2}
+    requiredAmount: 10
+  - fragment: {fileID: 11400000, guid: 371b896d20aa556439ff820258e090a1, type: 2}
+    requiredAmount: 25

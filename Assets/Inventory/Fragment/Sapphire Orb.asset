@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd888a3107c15943a081b46860d744a, type: 3}
   m_Name: Sapphire Orb
   m_EditorClassIdentifier: 
-  fragmentID: 
+  fragmentID: fragment_SapphireOrb
   fragmentName: Sapphire Orb
-  icon: {fileID: 0}
+  icon: {fileID: 1439218463, guid: 21e8f12987e05904bbc34e14d1d9f524, type: 3}
