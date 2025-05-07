@@ -19,7 +19,7 @@ MonoBehaviour:
     a soul to wander where memory cannot follow.
   blurredDescription: "A green stone glows with a love long lost, bound by threads
     of regret and time\u2019s cruel loop."
-  image: {fileID: 1489536960, guid: 63da4149f86a0b04793cdb4e6b1cfdd8, type: 3}
+  image: {fileID: 1048456462, guid: 96cd07a5ab49fc14b95c0622aea6fc2b, type: 3}
   requiredFragments:
   - fragment: {fileID: 11400000, guid: 14bc79c4d25f98a42a163e33aa581357, type: 2}
     requiredAmount: 20

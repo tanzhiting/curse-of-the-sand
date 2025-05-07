@@ -19,7 +19,7 @@ MonoBehaviour:
     life and rebirth."
   blurredDescription: "A golden emblem shaped like life itself, cradling the sun\u2019s
     reflection in silence."
-  image: {fileID: 1913944849, guid: a9f1b2140789f1e42acf4bd3aa0186c9, type: 3}
+  image: {fileID: 1169152720, guid: 3a232618de88fde4e8f37fafcd2649e1, type: 3}
   requiredFragments:
   - fragment: {fileID: 11400000, guid: 4dc23bc87523db244b2e03dc1f500e93, type: 2}
     requiredAmount: 10

@@ -19,7 +19,7 @@ MonoBehaviour:
     rebirth, divinity, and royal protection."
   blurredDescription: A beetle of deep blue takes flight on golden wings, cradling
     the sun and guarding eternity.
-  image: {fileID: 1853753299, guid: 1bae2228b49cbad4da13759cbd0fd8af, type: 3}
+  image: {fileID: 1186317140, guid: 1d346ed61d86c96429974aca86b66ce7, type: 3}
   requiredFragments:
   - fragment: {fileID: 11400000, guid: f9762676aaab76e45afef0ad33b7fe5e, type: 2}
     requiredAmount: 10

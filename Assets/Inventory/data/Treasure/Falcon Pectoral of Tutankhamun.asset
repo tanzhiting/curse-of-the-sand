@@ -19,7 +19,7 @@ MonoBehaviour:
     divine kingship and celestial protection."
   blurredDescription: A golden bird with eyes of stone soars across the chest, guarding
     the breath of kings.
-  image: {fileID: 1131442138, guid: 5eeb8a4ad13f6034489ddd3bf78ef634, type: 3}
+  image: {fileID: 1566033107, guid: 3f56d1c4648f32c45a099d7c05847384, type: 3}
   requiredFragments:
   - fragment: {fileID: 11400000, guid: 14bc79c4d25f98a42a163e33aa581357, type: 2}
     requiredAmount: 15
