@@ -8,8 +8,7 @@ public class BackpackManager : MonoBehaviour
     public Transform itemGrid;
     public ItemDetailPanel detailPanel;
 
-    // 假设玩家拥有碎片数量的数据库（用字典存储）
-    public Dictionary<FragmentData, int> playerFragmentCounts;
+    public PlayerInventorySO playerInventory; // ← 新增引用 ScriptableObject
 
     void Start()
     {
@@ -37,7 +36,7 @@ public class BackpackManager : MonoBehaviour
         for (int i = 0; i < data.requiredFragments.Length; i++)
         {
             var frag = data.requiredFragments[i].fragment;
-            result[i] = playerFragmentCounts.ContainsKey(frag) ? playerFragmentCounts[frag] : 0;
+            result[i] = playerInventory.GetFragmentCount(frag); // ← 用 ScriptableObject 获取
         }
         return result;
     }

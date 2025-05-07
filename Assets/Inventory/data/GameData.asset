@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c1a566a980d384fba7117bd0f7242f, type: 3}
+  m_Name: GameData
+  m_EditorClassIdentifier: 
+  playerFragments:
+  - fragment: {fileID: 11400000, guid: 739baf515ae2726418c52e319d691a90, type: 2}
+    count: 0
+  - fragment: {fileID: 11400000, guid: 4dc23bc87523db244b2e03dc1f500e93, type: 2}
+    count: 0
+  - fragment: {fileID: 11400000, guid: 14bc79c4d25f98a42a163e33aa581357, type: 2}
+    count: 0
+  - fragment: {fileID: 11400000, guid: 371b896d20aa556439ff820258e090a1, type: 2}
+    count: 0
+  - fragment: {fileID: 11400000, guid: f9762676aaab76e45afef0ad33b7fe5e, type: 2}
+    count: 0
+  - fragment: {fileID: 11400000, guid: 9d295133bd49eda42b6a4d34d51a00f3, type: 2}
+    count: 0

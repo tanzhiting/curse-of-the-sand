@@ -7242,6 +7242,7 @@ MonoBehaviour:
   itemSlotPrefab: {fileID: 1204130428702801515, guid: 316b0857e2baf154799cdb405a8e06f5, type: 3}
   itemGrid: {fileID: 1004985991}
   detailPanel: {fileID: 1970929152}
+  playerInventory: {fileID: 11400000, guid: 3f40fdcac81b4e74c84f9ea4c6f2d9d3, type: 2}
 --- !u!4 &1557837196
 Transform:
   m_ObjectHideFlags: 0
