@@ -151,6 +151,9 @@ MonoBehaviour:
   mainImage: {fileID: 5653690142792114330}
   fragmentGroup: {fileID: 5873593164801045644}
   fragmentSlotPrefab: {fileID: 4128402114029459924, guid: 874abef6fc8b8554a8a2a4343b6251c0, type: 3}
+  backgroundImage: {fileID: 186520693552397961}
+  normalBg: {fileID: -474742421, guid: fa9827fdbac79884bacb4a930af122f4, type: 3}
+  selectedBg: {fileID: 122725456, guid: f549a566a72badc42a4c6c2f4589815d, type: 3}
 --- !u!1 &1759766529431581845
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,18 +243,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: -5
+    m_Left: 0
     m_Right: 0
-    m_Top: 5
+    m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildAlignment: 4
+  m_Spacing: 2
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
+  m_ChildScaleWidth: 1
+  m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
 --- !u!1 &6324049537140820138
 GameObject:
@@ -363,7 +366,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 17.499992}
-  m_SizeDelta: {x: 76.9658, y: 76.9658}
+  m_SizeDelta: {x: 72, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1501379647392392661
 CanvasRenderer:

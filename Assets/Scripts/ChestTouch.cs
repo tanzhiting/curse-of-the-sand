@@ -2,10 +2,19 @@ using UnityEngine;
 
 public class ChestTouch : MonoBehaviour
 {
+    [Header("Fragment Settings")]
     public Sprite[] fragmentSprites;
+    public FragmentData[] fragmentDataList;  
+
+    [Header("Chest Objects")]
     public GameObject chestModel;
-    public NotificationUI notificationUI; // 拖入场景的NotificationUI
     public GameObject hintUI;
+
+    [Header("UI")]
+    public NotificationUI notificationUI;
+
+    [Header("Data")]
+    public PlayerInventorySO playerInventory;
 
     private bool opened = false;
     private bool isPlayerNearby = false;
@@ -74,9 +83,18 @@ public class ChestTouch : MonoBehaviour
     void OnChestOpened()
     {
         int index = Random.Range(0, fragmentSprites.Length);
-        Sprite chosenSprite = fragmentSprites[index];
 
-        chestModel.SetActive(false);
+        // 获取随机的碎片图和数据
+        Sprite chosenSprite = fragmentSprites[index];
+        FragmentData chosenData = fragmentDataList[index];
+
+        // 弹出通知
         notificationUI.ShowFragmentNotification(chosenSprite);
+
+        // 增加碎片到背包数据
+        playerInventory.AddFragment(chosenData, 1);
+
+        // 隐藏宝箱模型
+        chestModel.SetActive(false);
     }
 }

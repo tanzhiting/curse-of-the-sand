@@ -25,12 +25,15 @@ public class TreasureData : ScriptableObject
     // 获取当前碎片进度
     public string GetName(int collectedFragments)
     {
-        if (collectedFragments >= GetRequiredAmount() / 2) 
+        if (collectedFragments >= GetRequiredAmount())
         {
-            // 显示模糊描述
-            return blurredName == "???" ? fullName : blurredName;
+            return fullName;
         }
-        return "???"; // 初始状态时名字为???
+        else if (collectedFragments >= GetRequiredAmount() / 2)
+        {
+            return blurredName;
+        }
+        return "???";
     }
 
     public string GetDescription(int collectedFragments)
