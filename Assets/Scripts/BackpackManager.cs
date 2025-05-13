@@ -11,53 +11,74 @@ public class BackpackManager : MonoBehaviour
     public Transform itemGrid;
     public ItemDetailPanel detailPanel;
 
-    public PlayerInventorySO playerInventory; // ← 新增引用 ScriptableObject
+    public PlayerInventorySO playerInventory;
 
     [Header("UI References")]
-    public GameObject backpackUI;                // 背包主界面（整体父对象）
-    public GameObject countdownPanel;            // 倒数面板（带遮罩）
-    public TextMeshProUGUI countdownText;        // 倒数字体（挂在 Panel 下）
+    public GameObject backpackUI;
+    public GameObject countdownPanel;
+    public TextMeshProUGUI countdownText;
 
     private CraftItemSlot currentSelectedSlot;
+    private readonly List<CraftItemSlot> activeSlots = new();
+
+    public static BackpackManager Instance;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
+        RefreshAllSlots();
+    }
+
+    public void RefreshAllSlots()
+    {
+        foreach (Transform child in itemGrid)
+            Destroy(child.gameObject);
+
+        activeSlots.Clear();
+
         foreach (var treasure in allTreasures)
         {
             GameObject slotObj = Instantiate(itemSlotPrefab, itemGrid);
             var slot = slotObj.GetComponent<CraftItemSlot>();
-
             int[] owned = GetOwnedFragmentCounts(treasure);
             slot.Setup(treasure, this, owned);
+
+            // 订阅事件
+            slot.OnItemClickedEvent += OnItemClicked; 
+            activeSlots.Add(slot);
         }
 
-        if (allTreasures.Count > 0)
-            detailPanel.ShowItem(allTreasures[0], GetOwnedFragmentCounts(allTreasures[0]));
+        if (activeSlots.Count > 0)
+        {
+            currentSelectedSlot = activeSlots[0];
+            currentSelectedSlot.SetSelected(true);
+            detailPanel.ShowItem(currentSelectedSlot.GetTreasureData(), GetOwnedFragmentCounts(currentSelectedSlot.GetTreasureData()));
+        }
     }
 
     public void OnItemClicked(TreasureData treasure)
-    {   
-        // 1. 找到点击的那个 slot
-        CraftItemSlot clickedSlot = null;
-        foreach (Transform child in itemGrid)
-        {
-            var slot = child.GetComponent<CraftItemSlot>();
-            if (slot != null && slot.GetTreasureData() == treasure)
-            {
-                clickedSlot = slot;
-                break;
-            }
-        }
-
-        // 2. 取消之前的高亮
+    {
         if (currentSelectedSlot != null)
             currentSelectedSlot.SetSelected(false);
 
-        // 3. 设置新的高亮
-        if (clickedSlot != null)
+        foreach (var slot in activeSlots)
         {
-            currentSelectedSlot = clickedSlot;
-            currentSelectedSlot.SetSelected(true);
+            if (slot.GetTreasureData() == treasure)
+            {
+                currentSelectedSlot = slot;
+                currentSelectedSlot.SetSelected(true);
+                break;
+            }
         }
 
         detailPanel.ShowItem(treasure, GetOwnedFragmentCounts(treasure));
@@ -69,19 +90,18 @@ public class BackpackManager : MonoBehaviour
         for (int i = 0; i < data.requiredFragments.Length; i++)
         {
             var frag = data.requiredFragments[i].fragment;
-            result[i] = playerInventory.GetFragmentCount(frag); // ← 用 ScriptableObject 获取
+            result[i] = playerInventory.GetFragmentCount(frag);
         }
         return result;
     }
 
-    // 打开背包，暂停游戏
     public void OpenBackpack()
     {
         backpackUI.SetActive(true);
+        RefreshAllSlots();
         Time.timeScale = 0f;
     }
 
-    // 关闭背包，触发倒数恢复游戏
     public void CloseBackpack()
     {
         backpackUI.SetActive(false);
@@ -99,7 +119,6 @@ public class BackpackManager : MonoBehaviour
             countdownText.text = count.ToString();
             countdownText.transform.localScale = Vector3.one * 1.5f;
 
-            // 简单放大动画
             float t = 0f;
             while (t < 1f)
             {
@@ -115,5 +134,10 @@ public class BackpackManager : MonoBehaviour
 
         countdownPanel.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void NotifyFragmentGained()
+    {
+        RefreshAllSlots(); 
     }
 }

@@ -5,15 +5,18 @@ using TMPro;
 public class CraftItemSlot : MonoBehaviour
 {
     public Image mainImage;
-    public Transform fragmentGroup; // 父物体（用 HorizontalLayoutGroup 排列）
-    public GameObject fragmentSlotPrefab; // 小图标+数量的 prefab
+    public Transform fragmentGroup;              // 父物体（用于排列碎片图标）
+    public GameObject fragmentSlotPrefab;        // 小图标+数量的预制体
+
+    public Image backgroundImage;                // 背景图（用于高亮）
+    public Sprite normalBg;
+    public Sprite selectedBg;
 
     private TreasureData treasureData;
     private BackpackManager manager;
 
-    public Image backgroundImage; // 拖入背景图的引用
-    public Sprite normalBg;
-    public Sprite selectedBg;
+    public delegate void ItemSlotClicked(TreasureData data); // 定义点击事件委托
+    public event ItemSlotClicked OnItemClickedEvent;
 
     public void Setup(TreasureData data, BackpackManager manager, int[] ownedCounts)
     {
@@ -21,65 +24,62 @@ public class CraftItemSlot : MonoBehaviour
         this.manager = manager;
 
         mainImage.sprite = data.image;
-        SetPreserveAspect(mainImage); // ✅ 保持主图纵横比
+        SetPreserveAspect(mainImage);
 
-        // 清空旧的碎片UI
+        // 清空已有碎片图标
         foreach (Transform child in fragmentGroup)
             Destroy(child.gameObject);
 
         int collected = 0;
         int total = 0;
+
         for (int i = 0; i < data.requiredFragments.Length; i++)
         {
             var frag = data.requiredFragments[i];
-            collected += Mathf.Min(ownedCounts[i], frag.requiredAmount);
+            int owned = ownedCounts[i];
+            collected += Mathf.Min(owned, frag.requiredAmount);
             total += frag.requiredAmount;
 
+            // 创建碎片槽 UI
             GameObject fragSlot = Instantiate(fragmentSlotPrefab, fragmentGroup);
             Image icon = fragSlot.transform.Find("FragmentIcon").GetComponent<Image>();
             TMP_Text count = fragSlot.transform.Find("FragmentCount").GetComponent<TMP_Text>();
 
             icon.sprite = frag.fragment.icon;
-            SetPreserveAspect(icon); // ✅ 保持图标纵横比
+            SetPreserveAspect(icon);
 
-            string ownedStr = $"<color=#{(ownedCounts[i] < frag.requiredAmount ? "AF1D1D" : "FFFFFF")}>{ownedCounts[i]}</color>";
-            count.text = $"{ownedStr}/{frag.requiredAmount}";
+            // 红色代表不足，白色代表足够
+            string colorHex = owned < frag.requiredAmount ? "AF1D1D" : "FFFFFF";
+            count.text = $"<color=#{colorHex}>{owned}</color>/{frag.requiredAmount}";
         }
 
-        // 设置渐变效果
+        // 渐变显示宝藏主图，进度越高越亮
         SetRevealProgress(mainImage, collected, total);
     }
 
-    // ✅ 启用 Preserve Aspect
     private void SetPreserveAspect(Image image)
     {
         image.preserveAspect = true;
     }
 
-    // 设置渐变效果（黑色到白色）
     private void SetRevealProgress(Image image, int collected, int total)
     {
-        // 根据收集的碎片数量计算透明度比例
         float progress = Mathf.Clamp01((float)collected / total);
-
-        // 使用 Lerp 淡出黑色并显示图像
-        Color targetColor = Color.Lerp(Color.black, Color.white, progress);
-        image.color = targetColor;
+        Color revealColor = Color.Lerp(new Color(0.1f, 0.1f, 0.1f), Color.white, progress); // 暗→亮
+        image.color = revealColor;
     }
 
-    // 点击时被 Unity Button 事件调用
+    // 点击事件绑定在 Button 上时调用
     public void OnClick()
     {
-        manager.OnItemClicked(treasureData);
+        OnItemClickedEvent?.Invoke(treasureData);
     }
 
-    // ✅ 用于 BackpackManager 获取数据
     public TreasureData GetTreasureData()
     {
         return treasureData;
     }
 
-    // ✅ 控制是否选中
     public void SetSelected(bool isSelected)
     {
         backgroundImage.sprite = isSelected ? selectedBg : normalBg;

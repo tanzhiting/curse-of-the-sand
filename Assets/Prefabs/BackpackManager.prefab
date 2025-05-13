@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3149310130705314633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5223029109647474092}
+  - component: {fileID: 7166101486022839433}
+  m_Layer: 0
+  m_Name: BackpackManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5223029109647474092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3149310130705314633}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7166101486022839433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3149310130705314633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf811b2809adea64fbf6172528f36dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allTreasures:
+  - {fileID: 11400000, guid: 4c8f8a538dfe8274099cdb8e1d40ea65, type: 2}
+  - {fileID: 11400000, guid: 92780442365b1a34ba7af85a0f2aabb3, type: 2}
+  - {fileID: 11400000, guid: 6effec0a0a0368347a8bd2da16a86109, type: 2}
+  - {fileID: 11400000, guid: fd61c93bddfb8fb46a45896c4373c13f, type: 2}
+  - {fileID: 11400000, guid: dc7a05ceaa0f2964f81b30af9fa4d559, type: 2}
+  - {fileID: 11400000, guid: a9d6678b6fe04124e8bf6969443a57bb, type: 2}
+  itemSlotPrefab: {fileID: 1204130428702801515, guid: 316b0857e2baf154799cdb405a8e06f5, type: 3}
+  itemGrid: {fileID: 0}
+  detailPanel: {fileID: 0}
+  playerInventory: {fileID: 11400000, guid: 3f40fdcac81b4e74c84f9ea4c6f2d9d3, type: 2}
+  backpackUI: {fileID: 0}
+  countdownPanel: {fileID: 0}
+  countdownText: {fileID: 0}

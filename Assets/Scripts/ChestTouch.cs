@@ -3,8 +3,7 @@ using UnityEngine;
 public class ChestTouch : MonoBehaviour
 {
     [Header("Fragment Settings")]
-    public Sprite[] fragmentSprites;
-    public FragmentData[] fragmentDataList;  
+    public FragmentData[] fragmentDataList;  // ❌ 不再需要 fragmentSprites
 
     [Header("Chest Objects")]
     public GameObject chestModel;
@@ -15,6 +14,10 @@ public class ChestTouch : MonoBehaviour
 
     [Header("Data")]
     public PlayerInventorySO playerInventory;
+
+
+    [Header("Backpack Reference")]
+    public BackpackManager backpackManager; // ✅ 拖入 BackpackManager
 
     private bool opened = false;
     private bool isPlayerNearby = false;
@@ -45,16 +48,12 @@ public class ChestTouch : MonoBehaviour
             }
         }
 
-        // ⭐️ 让提示 UI 始终水平朝向摄像机（只绕 Y 轴）
         if (hintUI.activeSelf)
         {
             Vector3 camPosition = mainCam.transform.position;
             Vector3 lookDirection = hintUI.transform.position - camPosition;
-
-            // 只保留 XZ 平面方向
             lookDirection.y = 0f;
 
-            // 避免零向量报错
             if (lookDirection.sqrMagnitude > 0.001f)
             {
                 hintUI.transform.rotation = Quaternion.LookRotation(lookDirection);
@@ -82,19 +81,14 @@ public class ChestTouch : MonoBehaviour
 
     void OnChestOpened()
     {
-        int index = Random.Range(0, fragmentSprites.Length);
-
-        // 获取随机的碎片图和数据
-        Sprite chosenSprite = fragmentSprites[index];
+        int index = Random.Range(0, fragmentDataList.Length);
         FragmentData chosenData = fragmentDataList[index];
 
-        // 弹出通知
-        notificationUI.ShowFragmentNotification(chosenSprite);
-
-        // 增加碎片到背包数据
-        playerInventory.AddFragment(chosenData, 1);
-
-        // 隐藏宝箱模型
-        chestModel.SetActive(false);
+        notificationUI.ShowFragmentNotification(chosenData.icon); // 显示图标
+        playerInventory.AddFragment(chosenData, 1);               // 保存到 GameData
+        chestModel.SetActive(false);                              // 隐藏宝箱模型
+        // ✅ 通知背包系统更新 UI
+        if (backpackManager != null)
+        backpackManager.NotifyFragmentGained();
     }
 }
