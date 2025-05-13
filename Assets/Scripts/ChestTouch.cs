@@ -84,11 +84,33 @@ public class ChestTouch : MonoBehaviour
         int index = Random.Range(0, fragmentDataList.Length);
         FragmentData chosenData = fragmentDataList[index];
 
-        notificationUI.ShowFragmentNotification(chosenData.icon); // 显示图标
-        playerInventory.AddFragment(chosenData, 1);               // 保存到 GameData
         chestModel.SetActive(false);                              // 隐藏宝箱模型
-        // ✅ 通知背包系统更新 UI
+
+        // 1. 添加碎片数据
+        playerInventory.AddFragment(chosenData, 1);
+
+        // 2. 弹出碎片获得的通知
+        notificationUI.ShowFragmentNotification(chosenData.icon);
+
+        // 3. 通知背包系统：碎片更新 + 刷新 UI
         if (backpackManager != null)
-        backpackManager.NotifyFragmentGained();
+        {
+            backpackManager.NotifyFragmentGained();
+            backpackManager.RefreshGrid();
+
+            // ✅ 延迟检测是否可合成宝物
+            StartCoroutine(CheckUnlockAfterDelay(notificationUI.duration));
+        }
+    }
+
+    private System.Collections.IEnumerator CheckUnlockAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        TreasureData craftableTreasure = backpackManager.CheckForCraftableTreasureAfterCollect();
+        if (craftableTreasure != null)
+        {
+            notificationUI.ShowUnlockNotification(craftableTreasure.image);
+        }
     }
 }

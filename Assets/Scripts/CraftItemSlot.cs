@@ -60,15 +60,8 @@ public class CraftItemSlot : MonoBehaviour
             count.text = $"<color=#{colorHex}>{owned}</color>/{required}";
         }
 
-        // ✅ 合成后显示为白色；否则根据收集进度渐变
-        if (alreadyCrafted)
-        {
-            mainImage.color = Color.white;
-        }
-        else
-        {
-            SetRevealProgress(mainImage, collected, total);
-        }
+        // ✅ 设置亮度：合成后为1，未合成最大为0.5
+        SetRevealProgress(mainImage, collected, total, alreadyCrafted);
     }
 
     private void SetPreserveAspect(Image image)
@@ -76,10 +69,11 @@ public class CraftItemSlot : MonoBehaviour
         image.preserveAspect = true;
     }
 
-    private void SetRevealProgress(Image image, int collected, int total)
+    private void SetRevealProgress(Image image, int collected, int total, bool alreadyCrafted)
     {
         float progress = Mathf.Clamp01((float)collected / total);
-        Color revealColor = Color.Lerp(new Color(0.1f, 0.1f, 0.1f), Color.white, progress); // 暗→亮
+        float brightness = alreadyCrafted ? 1f : Mathf.Min(progress, 0.5f);
+        Color revealColor = Color.Lerp(new Color(0.1f, 0.1f, 0.1f), Color.white, brightness);
         image.color = revealColor;
     }
 

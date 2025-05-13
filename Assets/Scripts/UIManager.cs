@@ -19,7 +19,18 @@ public class UIManager : MonoBehaviour
     [Header("Countdown Text")]
     public TMP_Text countdownText;  // 使用 TMP_Text 替代 Text 组件
 
+    [Header("Buttons")]
+    public Button backpackButton; // 背包按钮
+
+    [Header("Backpack Icon")]
+    public Image backpackIcon;
+    public Sprite normalIcon;
+    public Sprite redDotIcon;  
+
     private bool isCountingDown = false;  // 防止倒计时重复触发
+
+    // 添加一个 BackpackManager 引用
+    public BackpackManager backpackManager;
 
     void Start()
     {
@@ -32,6 +43,14 @@ public class UIManager : MonoBehaviour
         restartButton.onClick.AddListener(RestartGame);
         homeButton.onClick.AddListener(ReturnToMainMenu);
         pauseButton.onClick.AddListener(PauseGame);  // 绑定暂停按钮点击事件
+
+        backpackButton.onClick.AddListener(OnBackpackButtonClicked);
+
+        // 确保初始化时已经给 backpackManager 赋值
+        if (backpackManager == null)
+        {
+            backpackManager = BackpackManager.Instance;  // 使用单例模式初始化
+        }
     }
 
     public void PauseGame()
@@ -91,5 +110,25 @@ public class UIManager : MonoBehaviour
         countdownPanel.SetActive(false);  // 隐藏倒计时面板
         Time.timeScale = 1f;  // 游戏继续
         isCountingDown = false;  // 重置倒计时标志
+    }
+
+    /// <summary>
+    /// 设置背包图标状态（是否有新合成宝物提示）
+    /// </summary>
+    /// <param name="hasNew">是否有可合成的宝物</param>
+    public void SetBackpackHasNewCraft(bool hasNew)
+    {
+        backpackIcon.sprite = hasNew ? redDotIcon : normalIcon;
+    }
+
+    /// <summary>
+    /// 当点击背包按钮时打开背包界面，并通知 BackpackManager
+    /// </summary>
+    public void OnBackpackButtonClicked()
+    {
+        if (backpackManager != null)
+        {
+            backpackManager.OpenBackpack();  // 打开背包界面
+        }
     }
 }
