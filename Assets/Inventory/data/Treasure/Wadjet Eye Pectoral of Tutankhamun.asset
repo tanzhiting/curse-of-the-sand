@@ -17,8 +17,8 @@ MonoBehaviour:
   blurredName: ???
   fullDescription: ' an ancient Egyptian protective amulet, often made of gold and
     worn by royalty or the deceased.'
-  blurredDescription: A golden amulet inlaid with gems, carved with a sacred eye
-    to protect and guide.
+  blurredDescription: "A golden emblem shaped like life itself, cradling the sun\u2019s
+    reflection in silence."
   image: {fileID: 1771209413, guid: 00a5b3fcff4dfe949800495b615c7469, type: 3}
   requiredFragments:
   - fragment: {fileID: 11400000, guid: 739baf515ae2726418c52e319d691a90, type: 2}

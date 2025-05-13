@@ -18,7 +18,10 @@ public class CraftItemSlot : MonoBehaviour
     public delegate void ItemSlotClicked(TreasureData data); // 定义点击事件委托
     public event ItemSlotClicked OnItemClickedEvent;
 
-    public void Setup(TreasureData data, BackpackManager manager, int[] ownedCounts)
+    /// <summary>
+    /// 初始化设置 CraftItemSlot 的显示。
+    /// </summary>
+    public void Setup(TreasureData data, BackpackManager manager, int[] ownedCounts, GameData gameData)
     {
         this.treasureData = data;
         this.manager = manager;
@@ -26,19 +29,23 @@ public class CraftItemSlot : MonoBehaviour
         mainImage.sprite = data.image;
         SetPreserveAspect(mainImage);
 
-        // 清空已有碎片图标
+        // 清空旧的碎片UI
         foreach (Transform child in fragmentGroup)
             Destroy(child.gameObject);
 
         int collected = 0;
         int total = 0;
 
+        bool alreadyCrafted = gameData.HasCraftedTreasure(data); // ✅ 判断是否已合成
+
         for (int i = 0; i < data.requiredFragments.Length; i++)
         {
             var frag = data.requiredFragments[i];
-            int owned = ownedCounts[i];
-            collected += Mathf.Min(owned, frag.requiredAmount);
-            total += frag.requiredAmount;
+            int required = frag.requiredAmount;
+            int owned = alreadyCrafted ? required : ownedCounts[i]; // ✅ 若已合成，则视为拥有所有
+
+            collected += Mathf.Min(owned, required);
+            total += required;
 
             // 创建碎片槽 UI
             GameObject fragSlot = Instantiate(fragmentSlotPrefab, fragmentGroup);
@@ -48,13 +55,20 @@ public class CraftItemSlot : MonoBehaviour
             icon.sprite = frag.fragment.icon;
             SetPreserveAspect(icon);
 
-            // 红色代表不足，白色代表足够
-            string colorHex = owned < frag.requiredAmount ? "AF1D1D" : "FFFFFF";
-            count.text = $"<color=#{colorHex}>{owned}</color>/{frag.requiredAmount}";
+            // ✅ 若已合成或拥有足够，文字为白色；否则为红色
+            string colorHex = (alreadyCrafted || owned >= required) ? "FFFFFF" : "AF1D1D";
+            count.text = $"<color=#{colorHex}>{owned}</color>/{required}";
         }
 
-        // 渐变显示宝藏主图，进度越高越亮
-        SetRevealProgress(mainImage, collected, total);
+        // ✅ 合成后显示为白色；否则根据收集进度渐变
+        if (alreadyCrafted)
+        {
+            mainImage.color = Color.white;
+        }
+        else
+        {
+            SetRevealProgress(mainImage, collected, total);
+        }
     }
 
     private void SetPreserveAspect(Image image)

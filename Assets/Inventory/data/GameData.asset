@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerFragments:
   - fragment: {fileID: 11400000, guid: 739baf515ae2726418c52e319d691a90, type: 2}
-    count: 0
+    count: 5
   - fragment: {fileID: 11400000, guid: 4dc23bc87523db244b2e03dc1f500e93, type: 2}
-    count: 0
+    count: 10
   - fragment: {fileID: 11400000, guid: 14bc79c4d25f98a42a163e33aa581357, type: 2}
     count: 1
   - fragment: {fileID: 11400000, guid: 371b896d20aa556439ff820258e090a1, type: 2}
@@ -25,3 +25,4 @@ MonoBehaviour:
     count: 1
   - fragment: {fileID: 11400000, guid: 9d295133bd49eda42b6a4d34d51a00f3, type: 2}
     count: 3
+  craftedTreasures: []

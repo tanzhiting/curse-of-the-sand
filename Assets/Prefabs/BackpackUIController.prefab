@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3618476916970685865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2360415881346844316}
+  - component: {fileID: 8695363410017886210}
+  m_Layer: 0
+  m_Name: BackpackUIController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2360415881346844316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3618476916970685865}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1181.6068, y: 620.17126, z: 969.14636}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8695363410017886210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3618476916970685865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a687f3ac0ea152d4887a1f439e23ddab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInventory: {fileID: 11400000, guid: 3f40fdcac81b4e74c84f9ea4c6f2d9d3, type: 2}
+  treasures:
+  - {fileID: 11400000, guid: 4c8f8a538dfe8274099cdb8e1d40ea65, type: 2}
+  - {fileID: 11400000, guid: 92780442365b1a34ba7af85a0f2aabb3, type: 2}
+  - {fileID: 11400000, guid: 6effec0a0a0368347a8bd2da16a86109, type: 2}
+  - {fileID: 11400000, guid: fd61c93bddfb8fb46a45896c4373c13f, type: 2}
+  - {fileID: 11400000, guid: dc7a05ceaa0f2964f81b30af9fa4d559, type: 2}
+  - {fileID: 11400000, guid: a9d6678b6fe04124e8bf6969443a57bb, type: 2}
+  itemGrid: {fileID: 0}
+  itemSlotPrefab: {fileID: 1204130428702801515, guid: 316b0857e2baf154799cdb405a8e06f5, type: 3}
+  detailPanel: {fileID: 0}
+  backpackManager: {fileID: 7166101486022839433, guid: bb461a8fbc3e3c644a0aa8773c9add73, type: 3}

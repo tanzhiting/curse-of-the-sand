@@ -4,58 +4,57 @@ using TMPro;
 
 public class ItemDetailPanel : MonoBehaviour
 {
-    public TMP_Text titleText;
+    [Header("Main Info")]
+    public TMP_Text nameText;
     public TMP_Text descriptionText;
-    public Image mainImage;
+    public Image itemImage;
+
+    [Header("Fragment Info")]
     public Image[] fragmentIcons;
     public TMP_Text[] fragmentTexts;
 
-    public void ShowItem(TreasureData data, int[] ownedCounts)
+    [Header("Craft Button")]
+    public Button craftButton;
+    public Image craftButtonImage;
+    public Sprite craftAvailableSprite;
+    public Sprite craftLockedSprite;
+
+    /// <summary>
+    /// 外部传入所有展示数据（已预处理），面板仅做展示
+    /// </summary>
+    public void ShowItem(
+        string title,
+        string description,
+        Sprite mainSprite,
+        Color imageColor,
+        Sprite[] fragmentSprites,
+        string[] fragmentTextStrings
+    )
     {
-        // 计算玩家收集的碎片数量和总碎片需求量
-        int collected = 0;
-        int total = 0;
-        for (int i = 0; i < data.requiredFragments.Length; i++)
+        nameText.text = title;
+        descriptionText.text = description;
+        itemImage.sprite = mainSprite;
+        itemImage.color = imageColor;
+        SetPreserveAspect(itemImage);
+        SetPreserveAspect(craftButtonImage);
+
+        for (int i = 0; i < fragmentSprites.Length; i++)
         {
-            collected += Mathf.Min(ownedCounts[i], data.requiredFragments[i].requiredAmount);
-            total += data.requiredFragments[i].requiredAmount;
+            fragmentIcons[i].sprite = fragmentSprites[i];
+            SetPreserveAspect(fragmentIcons[i]);
+            fragmentTexts[i].text = fragmentTextStrings[i];
         }
 
-        // 更新标题、描述和主图
-        titleText.text = data.GetName(collected);
-        descriptionText.text = data.GetDescription(collected);
-        mainImage.sprite = data.image;
-        SetPreserveAspect(mainImage); // 设置主图像保持比例
-
-        // 设置渐变效果
-        SetRevealProgress(mainImage, collected, total);
-
-        // 设置碎片图标和数量
-        for (int i = 0; i < data.requiredFragments.Length; i++)
+        // 如果碎片数量少于槽位总数，隐藏多余部分
+        for (int i = fragmentSprites.Length; i < fragmentIcons.Length; i++)
         {
-            fragmentIcons[i].sprite = data.requiredFragments[i].fragment.icon;
-            SetPreserveAspect(fragmentIcons[i]); // 设置碎片图标保持比例
-            
-            // 设置文本并根据条件更改颜色
-            string ownedStr = $"<color=#{(ownedCounts[i] < data.requiredFragments[i].requiredAmount ? "AF1D1D" : "FFFFFF")}>{ownedCounts[i]}</color>";
-            fragmentTexts[i].text = $"{ownedStr}/{data.requiredFragments[i].requiredAmount}";
+            fragmentIcons[i].gameObject.SetActive(false);
+            fragmentTexts[i].gameObject.SetActive(false);
         }
     }
 
-    // 设置保持比例
     private void SetPreserveAspect(Image image)
     {
         image.preserveAspect = true;
-    }
-
-    // 设置渐变效果（黑色到白色）
-    private void SetRevealProgress(Image image, int collected, int total)
-    {
-        // 根据收集的碎片数量计算透明度比例
-        float progress = Mathf.Clamp01((float)collected / total);
-
-        // 使用 Lerp 淡出黑色并显示图像
-        Color targetColor = Color.Lerp(Color.black, Color.white, progress);
-        image.color = targetColor;
     }
 }
