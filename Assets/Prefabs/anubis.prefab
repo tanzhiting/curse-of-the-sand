@@ -442,8 +442,8 @@ MonoBehaviour:
   - {fileID: -537742419, guid: 2a2afeefe6eda254c80d75aa7c4b80e6, type: 3}
   revealDistance: 50
   rank: 1
-  potionPrefab: {fileID: 7703305133122873486, guid: 2328f3a703fbf3b4a8ee52a05cffdbba, type: 3}
-  totemPrefab: {fileID: 3445126026717762172, guid: 0be5608362b1f4242b28872dcff8c866, type: 3}
+  potionPrefab: {fileID: 4818229181738035129, guid: d5164dfb535dcd54696eada7754d5e01, type: 3}
+  totemPrefab: {fileID: 6470744558280443442, guid: 279f537ecb7337542a3a56c30faaddc4, type: 3}
   lootParent: {fileID: 0}
 --- !u!1 &8908456840705452477
 GameObject:

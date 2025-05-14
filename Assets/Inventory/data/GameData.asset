@@ -18,12 +18,11 @@ MonoBehaviour:
   - fragment: {fileID: 11400000, guid: 4dc23bc87523db244b2e03dc1f500e93, type: 2}
     count: 0
   - fragment: {fileID: 11400000, guid: 14bc79c4d25f98a42a163e33aa581357, type: 2}
-    count: 0
+    count: 1
   - fragment: {fileID: 11400000, guid: 371b896d20aa556439ff820258e090a1, type: 2}
-    count: 0
+    count: 1
   - fragment: {fileID: 11400000, guid: f9762676aaab76e45afef0ad33b7fe5e, type: 2}
-    count: 0
+    count: 1
   - fragment: {fileID: 11400000, guid: 9d295133bd49eda42b6a4d34d51a00f3, type: 2}
     count: 0
-  craftedTreasures:
-  - {fileID: 11400000, guid: 4c8f8a538dfe8274099cdb8e1d40ea65, type: 2}
+  craftedTreasures: []
