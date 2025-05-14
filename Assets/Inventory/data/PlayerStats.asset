@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesDefeatedThisRun: 0
   bestEnemiesDefeated: 0
-  fragmentTypes: []
-  fragmentCountsThisRun: 
+  fragmentCountsThisRun: []

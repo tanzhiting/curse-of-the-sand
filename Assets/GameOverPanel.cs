@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class GameOverPanel : MonoBehaviour
 {
@@ -17,12 +18,12 @@ public class GameOverPanel : MonoBehaviour
     {
         // 显示敌人数
         amountText.text = $"{playerStats.enemiesDefeatedThisRun}";
-        
+
+        // 更新并显示最佳敌人击败数
         if (playerStats.enemiesDefeatedThisRun > playerStats.bestEnemiesDefeated)
         {
             playerStats.bestEnemiesDefeated = playerStats.enemiesDefeatedThisRun;
         }
-
         bestAmountText.text = $"{playerStats.bestEnemiesDefeated}";
 
         // 清空旧UI
@@ -31,15 +32,23 @@ public class GameOverPanel : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        // 显示每种碎片
-        for (int i = 0; i < playerStats.fragmentTypes.Length; i++)
+        // 获取所有本局收集到的碎片类型和数量
+        List<FragmentEntry> collectedFragments = playerStats.fragmentCountsThisRun;
+
+        bool hasValidFragments = false;
+
+        foreach (var fragmentEntry in collectedFragments)
         {
-            if (playerStats.fragmentCountsThisRun[i] > 0)
+            if (fragmentEntry.count > 0 && fragmentEntry.fragment != null)
             {
                 GameObject go = Instantiate(fragmentDisplayPrefab, fragmentGridParent);
-                go.transform.GetChild(0).GetComponent<Image>().sprite = playerStats.fragmentTypes[i].icon;
-                go.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = playerStats.fragmentCountsThisRun[i].ToString();
+                FragmentDisplayUI displayUI = go.GetComponent<FragmentDisplayUI>();
+                displayUI.Setup(fragmentEntry.fragment.icon, fragmentEntry.count);
+                hasValidFragments = true;
             }
         }
+
+        // 根据是否有有效碎片决定是否显示 fragmentGridParent
+        fragmentGridParent.gameObject.SetActive(hasValidFragments);
     }
 }

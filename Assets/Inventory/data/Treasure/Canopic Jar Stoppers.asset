@@ -19,7 +19,7 @@ MonoBehaviour:
     guarding a sacred organ for the afterlife."
   blurredDescription: Four faces guard the hollow vessels, each a silent vow to shield
     what once gave life.
-  image: {fileID: -1886157211, guid: bf795552f8ae09a409b8db4ee75b110d, type: 3}
+  image: {fileID: -1981747840, guid: 1d201ac03598fc440b5d182b252eaa35, type: 3}
   requiredFragments:
   - fragment: {fileID: 11400000, guid: 739baf515ae2726418c52e319d691a90, type: 2}
     requiredAmount: 10

@@ -26,6 +26,8 @@ public class EnemyPatternHandler : MonoBehaviour
 
     public Transform lootParent;
 
+    private GameManager gameManager;
+
     void Start()
     {
         if (lootParent == null)
@@ -59,6 +61,8 @@ public class EnemyPatternHandler : MonoBehaviour
         }
 
         canvas.transform.localPosition = new Vector3(0, baseHeight, 0);
+
+        gameManager = Object.FindFirstObjectByType<GameManager>();
     }
 
     void Update()
@@ -140,6 +144,9 @@ public class EnemyPatternHandler : MonoBehaviour
 
             if (currentIndex >= patternSequence.Count)
             {
+                // 击败敌人
+                gameManager?.RecordEnemyKill(); // 新增：通知 GameManager
+                
                 DropLoot();
                 gameObject.SetActive(false); // Object pooling reuse
             }

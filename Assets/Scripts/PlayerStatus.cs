@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour
     private float currentHealth;
 
     public HealthBar healthbar;
+    public UIManager uiManager; // 引用 UIManager
 
     [Header("Poison Settings")]
     [SerializeField] private bool isPoisoned = true;
@@ -85,11 +86,13 @@ public class PlayerStats : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Player has died.");
-            // 可以加死亡动画、结束游戏等
+            if (uiManager != null)
+            {
+                uiManager.ShowGameOverPanel();  // 调用 UIManager 显示 Game Over 面板
+            }
         }
     }
 
-    
     public void Heal(float amount)
     {
         currentHealth += amount;

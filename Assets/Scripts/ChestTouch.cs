@@ -3,7 +3,7 @@ using UnityEngine;
 public class ChestTouch : MonoBehaviour
 {
     [Header("Fragment Settings")]
-    public FragmentData[] fragmentDataList;  // ❌ 不再需要 fragmentSprites
+    public FragmentData[] fragmentDataList;
 
     [Header("Chest Objects")]
     public GameObject chestModel;
@@ -14,10 +14,10 @@ public class ChestTouch : MonoBehaviour
 
     [Header("Data")]
     public PlayerInventorySO playerInventory;
-
+    public PlayerStatsSO playerStats; // ✅ 添加本局统计数据
 
     [Header("Backpack Reference")]
-    public BackpackManager backpackManager; // ✅ 拖入 BackpackManager
+    public BackpackManager backpackManager;
 
     private bool opened = false;
     private bool isPlayerNearby = false;
@@ -84,21 +84,25 @@ public class ChestTouch : MonoBehaviour
         int index = Random.Range(0, fragmentDataList.Length);
         FragmentData chosenData = fragmentDataList[index];
 
-        chestModel.SetActive(false);                              // 隐藏宝箱模型
+        chestModel.SetActive(false); // 隐藏宝箱模型
 
         // 1. 添加碎片数据
         playerInventory.AddFragment(chosenData, 1);
 
-        // 2. 弹出碎片获得的通知
+        // ✅ 2. 添加到本局记录
+        if (playerStats != null)
+        {
+            playerStats.AddFragment(chosenData, 1);
+        }
+
+        // 3. 弹出碎片获得的通知
         notificationUI.ShowFragmentNotification(chosenData.icon);
 
-        // 3. 通知背包系统：碎片更新 + 刷新 UI
+        // 4. 通知背包系统：碎片更新 + 刷新 UI
         if (backpackManager != null)
         {
             backpackManager.NotifyFragmentGained();
             backpackManager.RefreshGrid();
-
-            // ✅ 延迟检测是否可合成宝物
             StartCoroutine(CheckUnlockAfterDelay(notificationUI.duration));
         }
     }
