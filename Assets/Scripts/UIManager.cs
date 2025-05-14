@@ -27,6 +27,11 @@ public class UIManager : MonoBehaviour
     public Sprite normalIcon;
     public Sprite redDotIcon;  
 
+    [Header("Game Over")]
+    public GameObject gameOverPanel;
+    public Button gameOverRestartButton;
+    public Button gameOverHomeButton;
+
     private bool isCountingDown = false;  // 防止倒计时重复触发
 
     // 添加一个 BackpackManager 引用
@@ -51,6 +56,9 @@ public class UIManager : MonoBehaviour
         {
             backpackManager = BackpackManager.Instance;  // 使用单例模式初始化
         }
+
+        gameOverRestartButton.onClick.AddListener(RestartGame);
+        gameOverHomeButton.onClick.AddListener(ReturnToMainMenu);
     }
 
     public void PauseGame()
@@ -130,5 +138,14 @@ public class UIManager : MonoBehaviour
         {
             backpackManager.OpenBackpack();  // 打开背包界面
         }
+    }
+
+    ///<summary>
+    /// gameover panel
+    /// </summary>
+    public void ShowGameOverPanel()
+    {
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;  // 暂停游戏
     }
 }
