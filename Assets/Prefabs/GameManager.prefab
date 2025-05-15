@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 30
   player: {fileID: 0}
+  playerStats: {fileID: 11400000, guid: 91967ad876632f0458e57456be8978a2, type: 2}

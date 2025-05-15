@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf811b2809adea64fbf6172528f36dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backpackUI: {fileID: 207218334788809359, guid: 0b71c1ed13eef424db4420221eff8de0, type: 3}
+  countdownPanel: {fileID: 9215993443941469299, guid: 6b7e4d18e29842f48b9b2d47efb73371, type: 3}
+  countdownText: {fileID: 6732484549886683942, guid: b3e0087cfd91829458374b4b3034402d, type: 3}
+  inventory: {fileID: 11400000, guid: 3f40fdcac81b4e74c84f9ea4c6f2d9d3, type: 2}
   allTreasures:
   - {fileID: 11400000, guid: 4c8f8a538dfe8274099cdb8e1d40ea65, type: 2}
   - {fileID: 11400000, guid: 92780442365b1a34ba7af85a0f2aabb3, type: 2}
@@ -51,10 +55,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fd61c93bddfb8fb46a45896c4373c13f, type: 2}
   - {fileID: 11400000, guid: dc7a05ceaa0f2964f81b30af9fa4d559, type: 2}
   - {fileID: 11400000, guid: a9d6678b6fe04124e8bf6969443a57bb, type: 2}
-  itemSlotPrefab: {fileID: 1204130428702801515, guid: 316b0857e2baf154799cdb405a8e06f5, type: 3}
-  itemGrid: {fileID: 0}
-  detailPanel: {fileID: 0}
-  playerInventory: {fileID: 11400000, guid: 3f40fdcac81b4e74c84f9ea4c6f2d9d3, type: 2}
-  backpackUI: {fileID: 0}
-  countdownPanel: {fileID: 0}
-  countdownText: {fileID: 0}
+  gameData: {fileID: 11400000, guid: 2b274475294f1b64fa676942bbe423b6, type: 2}
+  uiManager: {fileID: 518605660276181945, guid: 29047d21f0d8b8f46a82249121eeaa7c, type: 3}
+  notificationUI: {fileID: 8276135629465141109, guid: 383e724e06eb0c040b83e6c2a0cef9f8, type: 3}
+  backpackUIController: {fileID: 8695363410017886210, guid: 1540a8034569e1449972784660350ad0, type: 3}

@@ -158,7 +158,7 @@ MonoBehaviour:
     m_Bits: 128
   health: 0
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 80
+  walkPointRange: 60
   timeBetweenAttacks: 0.5
   projectile: {fileID: 2051040552699688006, guid: 61e7a2b11a4ed914582f0121322788b1, type: 3}
   sightRange: 80

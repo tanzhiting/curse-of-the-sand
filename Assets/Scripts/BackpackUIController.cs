@@ -22,6 +22,25 @@ public class BackpackUIController : MonoBehaviour
 
     private CraftItemSlot currentSelectedSlot;
 
+    // 动态绑定 itemGrid，避免手动拖拽时漏绑
+    void Awake()
+    {
+        if (itemGrid == null)
+        {
+            Transform canvas = GameObject.Find("Canvas")?.transform;
+            Debug.Log("Canvas found: " + (canvas != null));
+
+            Transform backpack = canvas?.Find("Backpack");
+            Debug.Log("Backpack found: " + (backpack != null));
+
+            itemGrid = backpack?.Find("ItemGrid");
+            Debug.Log("ItemGrid found: " + (itemGrid != null));
+
+            if (itemGrid == null)
+                Debug.LogError("BackpackUIController: itemGrid is not assigned and could not be found at Canvas > Backpack > ItemGrid");
+        }
+    }
+
     void Start()
     {
         RefreshGrid();
@@ -104,11 +123,9 @@ public class BackpackUIController : MonoBehaviour
             fragIconArray[i] = data.requiredFragments[i].fragment.icon;
         }
 
-        // ✅ 名称与描述处理，只在 crafted 时显示完整
         string displayName = GetDisplayName(data, collected, alreadyCrafted);
         string displayDesc = GetDisplayDescription(data, collected, alreadyCrafted);
 
-        // ✅ 图片亮度最多到 80%，只有 crafted 时变全白
         float progress = Mathf.Clamp01((float)collected / total);
         float brightness = alreadyCrafted ? 1f : Mathf.Min(progress, 0.5f);
         Color imageColor = Color.Lerp(new Color(0.1f, 0.1f, 0.1f), Color.white, brightness);
@@ -122,7 +139,6 @@ public class BackpackUIController : MonoBehaviour
             fragTextArray
         );
 
-        // ✅ 合成按钮状态处理
         bool isUnlocked = collected >= total;
 
         if (mode == BackpackMode.Crafting && !alreadyCrafted)
@@ -175,10 +191,8 @@ public class BackpackUIController : MonoBehaviour
         {
             gameData.AddCraftedTreasure(data);
 
-            // ✅ 刷新显示为完整信息
             UpdateDetailPanel(data);
 
-            // ✅ 刷新整个格子 UI
             RefreshGrid();
         }
     }

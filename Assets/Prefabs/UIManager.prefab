@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3940291915829428406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5467982426138172748}
+  - component: {fileID: 518605660276181945}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5467982426138172748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3940291915829428406}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.24686241, y: -24.779253, z: -105.27746}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &518605660276181945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3940291915829428406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a4f6a25fd857f44b057707f0948af5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 4625180729638759247, guid: 4d32e3a2ec8dd2443b8b4fddfb2c06f1, type: 3}
+  countdownPanel: {fileID: 9215993443941469299, guid: 6b7e4d18e29842f48b9b2d47efb73371, type: 3}
+  resumeButton: {fileID: 7094253690340979935, guid: 88a7a921c8383124b88b85cb3d245963, type: 3}
+  restartButton: {fileID: 2447756054431404597, guid: e27862d020d2365408323374b807fe88, type: 3}
+  homeButton: {fileID: 3276082496157913560, guid: 4debba0c0531d374bab97700900a8708, type: 3}
+  pauseButton: {fileID: 3692226032839014702, guid: 32ec22c4ce48c3a40a3cbd885ee6597d, type: 3}
+  countdownText: {fileID: 6732484549886683942, guid: b3e0087cfd91829458374b4b3034402d, type: 3}
+  backpackButton: {fileID: 8783554090920814638, guid: f798b4e65583e78448ff223750dc71d6, type: 3}
+  backpackIcon: {fileID: 4634751266705255120, guid: f798b4e65583e78448ff223750dc71d6, type: 3}
+  normalIcon: {fileID: 867773628, guid: 4abf147ef5d1e58419a952cba47afca7, type: 3}
+  redDotIcon: {fileID: -1132022051, guid: ddb3da83b24771a45a001844728a0c62, type: 3}
+  gameOverPanel: {fileID: 9122141666177467445, guid: 9b85ee460aa690d4382800d320760a67, type: 3}
+  gameOverRestartButton: {fileID: 2626698499315644358, guid: aceaf8edaf25bd6408864d7e7875dd2e, type: 3}
+  gameOverHomeButton: {fileID: 270478391799871741, guid: b8c59cd4702c4104bb5684d63872d5c3, type: 3}
+  backpackManager: {fileID: 7166101486022839433, guid: bb461a8fbc3e3c644a0aa8773c9add73, type: 3}

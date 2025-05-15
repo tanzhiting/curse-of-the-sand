@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class ChestTouch : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class ChestTouch : MonoBehaviour
 
     [Header("Data")]
     public PlayerInventorySO playerInventory;
-    public PlayerStatsSO playerStats; // ✅ 添加本局统计数据
+    public PlayerStatsSO playerStats;
 
     [Header("Backpack Reference")]
     public BackpackManager backpackManager;
@@ -22,6 +23,9 @@ public class ChestTouch : MonoBehaviour
     private bool opened = false;
     private bool isPlayerNearby = false;
     private Camera mainCam;
+
+    // ✅ 外部可以监听宝箱开启事件，用于通知 Spawner
+    public event Action OnChestDestroyed;
 
     void Start()
     {
@@ -48,6 +52,7 @@ public class ChestTouch : MonoBehaviour
             }
         }
 
+        // HintUI 朝向相机
         if (hintUI.activeSelf)
         {
             Vector3 camPosition = mainCam.transform.position;
@@ -81,7 +86,7 @@ public class ChestTouch : MonoBehaviour
 
     void OnChestOpened()
     {
-        int index = Random.Range(0, fragmentDataList.Length);
+        int index = UnityEngine.Random.Range(0, fragmentDataList.Length);
         FragmentData chosenData = fragmentDataList[index];
 
         chestModel.SetActive(false); // 隐藏宝箱模型
@@ -89,22 +94,25 @@ public class ChestTouch : MonoBehaviour
         // 1. 添加碎片数据
         playerInventory.AddFragment(chosenData, 1);
 
-        // ✅ 2. 添加到本局记录
+        // 2. 添加到本局统计
         if (playerStats != null)
         {
             playerStats.AddFragment(chosenData, 1);
         }
 
-        // 3. 弹出碎片获得的通知
+        // 3. 显示通知 UI
         notificationUI.ShowFragmentNotification(chosenData.icon);
 
-        // 4. 通知背包系统：碎片更新 + 刷新 UI
+        // 4. 通知背包系统更新
         if (backpackManager != null)
         {
             backpackManager.NotifyFragmentGained();
             backpackManager.RefreshGrid();
             StartCoroutine(CheckUnlockAfterDelay(notificationUI.duration));
         }
+
+        // ✅ 最后触发事件：通知 Spawner 这个宝箱“消失”
+        OnChestDestroyed?.Invoke();
     }
 
     private System.Collections.IEnumerator CheckUnlockAfterDelay(float delay)
