@@ -10,6 +10,9 @@ public enum BackpackMode
 
 public class BackpackUIController : MonoBehaviour 
 {
+    // ✅ Singleton 实现
+    public static BackpackUIController Instance { get; private set; }
+
     public PlayerInventorySO playerInventory;
     public TreasureData[] treasures;
     public Transform itemGrid;
@@ -22,9 +25,18 @@ public class BackpackUIController : MonoBehaviour
 
     private CraftItemSlot currentSelectedSlot;
 
-    // 动态绑定 itemGrid，避免手动拖拽时漏绑
+    // ✅ 动态绑定 itemGrid + Singleton 初始化
     void Awake()
     {
+        // Singleton 初始化
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
+        // 自动查找 itemGrid
         if (itemGrid == null)
         {
             Transform canvas = GameObject.Find("Canvas")?.transform;

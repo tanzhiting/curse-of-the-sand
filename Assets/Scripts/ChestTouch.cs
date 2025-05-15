@@ -10,21 +10,14 @@ public class ChestTouch : MonoBehaviour
     public GameObject chestModel;
     public GameObject hintUI;
 
-    [Header("UI")]
-    public NotificationUI notificationUI;
-
     [Header("Data")]
     public PlayerInventorySO playerInventory;
     public PlayerStatsSO playerStats;
-
-    [Header("Backpack Reference")]
-    public BackpackManager backpackManager;
 
     private bool opened = false;
     private bool isPlayerNearby = false;
     private Camera mainCam;
 
-    // ✅ 外部可以监听宝箱开启事件，用于通知 Spawner
     public event Action OnChestDestroyed;
 
     void Start()
@@ -41,9 +34,11 @@ public class ChestTouch : MonoBehaviour
         {
             Vector2 pos = Input.touchCount > 0 ? Input.GetTouch(0).position : (Vector2)Input.mousePosition;
             Ray ray = Camera.main.ScreenPointToRay(pos);
+
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (hit.transform == transform && isPlayerNearby)
+                // ✅ 改成只要点击的是这个宝箱或它的子物体，就触发
+                if (hit.collider != null && hit.collider.transform.IsChildOf(transform) && isPlayerNearby)
                 {
                     opened = true;
                     hintUI.SetActive(false);
@@ -52,13 +47,11 @@ public class ChestTouch : MonoBehaviour
             }
         }
 
-        // HintUI 朝向相机
         if (hintUI.activeSelf)
         {
             Vector3 camPosition = mainCam.transform.position;
             Vector3 lookDirection = hintUI.transform.position - camPosition;
             lookDirection.y = 0f;
-
             if (lookDirection.sqrMagnitude > 0.001f)
             {
                 hintUI.transform.rotation = Quaternion.LookRotation(lookDirection);
@@ -89,40 +82,29 @@ public class ChestTouch : MonoBehaviour
         int index = UnityEngine.Random.Range(0, fragmentDataList.Length);
         FragmentData chosenData = fragmentDataList[index];
 
-        chestModel.SetActive(false); // 隐藏宝箱模型
+        chestModel.SetActive(false);
 
-        // 1. 添加碎片数据
         playerInventory.AddFragment(chosenData, 1);
+        playerStats?.AddFragment(chosenData, 1);
 
-        // 2. 添加到本局统计
-        if (playerStats != null)
-        {
-            playerStats.AddFragment(chosenData, 1);
-        }
+        NotificationUI.Instance?.ShowFragmentNotification(chosenData.icon);
+        BackpackUIController.Instance?.RefreshGrid();
 
-        // 3. 显示通知 UI
-        notificationUI.ShowFragmentNotification(chosenData.icon);
+        StartCoroutine(CheckUnlockAfterDelay(NotificationUI.Instance != null ? NotificationUI.Instance.duration : 2f));
 
-        // 4. 通知背包系统更新
-        if (backpackManager != null)
-        {
-            backpackManager.NotifyFragmentGained();
-            backpackManager.RefreshGrid();
-            StartCoroutine(CheckUnlockAfterDelay(notificationUI.duration));
-        }
-
-        // ✅ 最后触发事件：通知 Spawner 这个宝箱“消失”
         OnChestDestroyed?.Invoke();
     }
 
     private System.Collections.IEnumerator CheckUnlockAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-
-        TreasureData craftableTreasure = backpackManager.CheckForCraftableTreasureAfterCollect();
-        if (craftableTreasure != null)
+        if (BackpackManager.Instance != null)
         {
-            notificationUI.ShowUnlockNotification(craftableTreasure.image);
+            TreasureData craftable = BackpackManager.Instance.CheckForCraftableTreasureAfterCollect();
+            if (craftable != null)
+            {
+                NotificationUI.Instance?.ShowUnlockNotification(craftable.image);
+            }
         }
     }
 }
